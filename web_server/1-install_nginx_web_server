@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# Script to install and configure Nginx web server
+
+# Update package lists and install nginx with automatic yes to prompts
+apt-get update
+apt-get install -y nginx
+
+# Create a simple HTML page with the required string
+echo "Holberton School" > /var/www/html/index.html
+
+# Ensure nginx is running and restart it
+service nginx start
+
+# Make sure nginx starts on boot
+update-rc.d nginx defaults 
