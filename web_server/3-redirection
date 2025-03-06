@@ -9,10 +9,17 @@ apt-get install -y nginx
 echo "Holberton School" > /var/www/html/index.html
 
 # Configure redirection by modifying the default Nginx configuration
-sed -i '/server_name _;/a \\n\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n\t}' /etc/nginx/sites-available/default
+# Only add if it doesn't already exist
+if ! grep -q "location /redirect_me" /etc/nginx/sites-available/default; then
+    sed -i '/server_name _;/a \\n\tlocation \/redirect_me {\n\t\treturn 301 https:\/\/www.youtube.com\/watch?v=QH2-TGUlwu4;\n\t}' /etc/nginx/sites-available/default
+fi
 
 # Ensure nginx is running and restart it
 service nginx restart
 
 # Make sure nginx starts on boot
-update-rc.d nginx defaults 
+update-rc.d nginx defaults
+
+# Test the redirection and show the 301 status code
+echo "Testing redirection:"
+curl -sI localhost/redirect_me | grep "301 Moved Permanently" 

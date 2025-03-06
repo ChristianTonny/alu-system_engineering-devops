@@ -12,4 +12,7 @@ echo "Holberton School" > /var/www/html/index.html
 service nginx start
 
 # Make sure nginx starts on boot
-update-rc.d nginx defaults 
+update-rc.d nginx defaults
+
+# Verify the content is correct
+curl localhost 
