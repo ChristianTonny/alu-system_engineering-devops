@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# UFW configuration: block all incoming traffic except ports 22, 80, and 443
+
+# Install UFW if not already installed
+sudo apt-get update
+sudo apt-get install ufw -y
+
+# Reset UFW to default settings
+sudo ufw --force reset
+
+# Set default policies
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+
+# Allow specific ports
+sudo ufw allow 22/tcp
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+# Enable UFW
+sudo ufw --force enable 
