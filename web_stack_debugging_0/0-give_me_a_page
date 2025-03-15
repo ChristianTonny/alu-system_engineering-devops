@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Fix Apache to serve a page with "Hello Holberton"
+
+service apache2 start 
