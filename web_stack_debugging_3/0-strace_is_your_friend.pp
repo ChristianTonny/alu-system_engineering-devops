@@ -1,8 +1,5 @@
-# Puppet manifest to fix Apache 500 error
-# Based on strace analysis, the issue is likely a misnamed file or typo
-
+# Fix Apache 500 error by replacing typo in file extension
 exec { 'fix-wordpress':
-  command => 'sed -i "s/\.phpp/.php/g" /var/www/html/wp-settings.php',
-  path    => ['/usr/local/bin/', '/bin/'],
-  provider => 'shell',
+  command => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
+  path    => '/usr/local/bin:/usr/bin:/bin',
 } 
